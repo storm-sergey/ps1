@@ -20,7 +20,7 @@ Get-ChildItem $Src | Sort-Object -Unique | Foreach-Object -EV Err -EA SilentlyCo
             $YearPath + "Other"
         }
     
-        # Check the path exist
+        # Check the path existence
         if (-Not (Test-Path $YearMonthPath)) {
             New-Item -Path $YearMonthPath -ItemType Directory
         }
@@ -29,7 +29,7 @@ Get-ChildItem $Src | Sort-Object -Unique | Foreach-Object -EV Err -EA SilentlyCo
         $path = $_.FullName.Replace('[', '``[').Replace(']', '``]')
         Copy-Item -Path $path -Destination $YearMonthPath -Force
     
-        # Mem for duplicate checking
+        # Remember for duplicate checking
         $UniqueName = $_.Name.Substring(0, $_.Name.LastIndexOf(".")) 
     }   
 }
