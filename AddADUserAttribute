@@ -1,0 +1,15 @@
+$Attr = "extensionAttribute14"
+
+while ($true) {
+    $User = Read-Host "Username"
+    [Int]$Tabel = Read-Host "Tabel"
+    
+    $OldAttr = Get-ADUser $User -Properties $Attr | Select $Attr
+    Set-ADUser $User -Clear $Attr
+    Set-ADUser $User -Add @{$Attr=$Tabel}
+
+    Write-Host "------------------------------------------"
+    Write-Host "has added $Tabel instead of $User $OldAttr"
+    Write-Host "------------------------------------------"
+    Write-Host ""
+}
