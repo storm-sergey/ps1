@@ -1,0 +1,13 @@
+$City = Read-Host "Moscow/Piter"
+$Dealership = Read-Host "AD dealership, for example: ACSever"
+$SourceOU = "OU=OU-$Dealership,OU=OU-$City,DC=int,DC=rolfcorp,DC=ru"
+$GroupName = Read-Host "AD group name, for example: All-North"
+
+$CountUsersInTheGroup = (Get-ADGroupMember -Identity "All-North").Count
+Write-Host "Before adding: $CountUsersInTheGroup"
+
+Get-ADUser -SearchBase $SourceOU -Filter * | ForEach-Object { Add-ADGroupMember -Identity $GroupNAME -Members $_.SamAccountName }
+
+$CountUsersInTheGroup = (Get-ADGroupMember -Identity "All-North").Count
+Write-Host "After adding $CountUsersInTheGroup"
+Read-Host "Press enter"
